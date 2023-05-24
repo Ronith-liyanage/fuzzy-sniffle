@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YouTube Video with Fading Text</title>
+  <style>
+    /* Style for the video container */
+    #video-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* Style for the video */
+    #video {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Style for the text overlay */
+    #overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+  </style>
+</head>
+<body>
+  <div id="video-container">
+    <iframe id="video" src="https://www.youtube.com/embed/cSgpAe9tl3Y?autoplay=1&start=0.25" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div id="overlay">
+      <p class="line">We might be distant rivals or even good friends</p>
+      <p class="line">I don't know how to describe this</p>
+      <p class="line">I think of you as a friend even though you just act the fool</p>
+      <p class="line">We are all on a great journey</p>
+      <p class="line">It's a big milestone you reached, my friend</p>
+      <p class="line">You've lived until this moment</p>
+      <p class="line">Why not keep living, my friend?</p>
+      <p class="line">Achieve what you desire</p>
+      <p id="birthday">Happy Birthday!</p>
+    </div>
+  </div>
+
+  <script>
+    // Get all the text lines
+    var lines = document.getElementsByClassName("line");
+
+    // Function to generate a random color
+    function getRandomColor() {
+      var letters = "0123456789ABCDEF";
+      var color = "#";
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    // Function to show each line with fading effect and random color
+    function showLine(lineIndex, delay) {
+      setTimeout(function() {
+        var line = lines[lineIndex];
+        line.style.opacity = "1";
+        line.style.color = getRandomColor();
+        setTimeout(function() {
+          line.style.opacity = "0";
+        }, 10000); // Fade out after 10 seconds
+      }, delay);
+    }
+
+    // Show each line with fading effect and random color
+    var delay = 2000; // Initial delay
+    for (var i = 0; i < lines.length; i++) {
+      showLine(i, delay);
+      delay += 10000; // Delay between lines (10 seconds)
+    }
+
+    // Show the "Happy Birthday!" line after all other lines
+    setTimeout(function() {
+      document.getElementById("birthday").style.opacity = "1";
+      document.getElementById("birthday").style.color = getRandomColor();
+    }, delay);
+  </script>
+</body>
+</html>
