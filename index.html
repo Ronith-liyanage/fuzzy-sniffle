@@ -21,29 +21,21 @@
 
     /* Style for the text overlay */
     #overlay {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Style for each line of text */
+    .line {
       font-size: 24px;
       font-weight: bold;
       text-align: center;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    }
-
-    /* Style for the highlighted message */
-    #cake-message {
-      font-size: 32px;
-      font-weight: bold;
-      color: #FFD700;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    }
-
-    /* Style for the happy face */
-    #happy-face {
-      font-size: 48px;
-      color: #FFD700;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      position: absolute;
+      opacity: 0;
     }
   </style>
 </head>
@@ -62,8 +54,9 @@
       <p class="line" id="rk-wish">Happy Birthday, LegendKiller!</p>
       <p class="line" id="recurring27-wish">Happy Birthday from recurring27!</p>
       <p class="line" id="mck7002-wish">Happy Birthday from MCK7002!</p>
-      <p id="birthday">Hope we will get some cake on 26th <span id="happy-face">😊</span></p>
-      <p id="cake-message">Happy Birthday!</p>
+      <p class="line" id="cake-line">Hope we will get some cake on 26th</p>
+      <p class="line" id="happy-face-line">😊</p>
+      <p class="line" id="birthday">Happy Birthday!</p>
     </div>
   </div>
 
@@ -83,25 +76,30 @@
 
     // Function to fade in and fade out the lines of text
     function fadeLines() {
+      var delay = 1000; // Delay before starting the animation
+      var duration = 2000; // Duration of each animation
+
       for (var i = 0; i < lines.length; i++) {
         var line = lines[i];
-        var delay = i * 10000; // Delay in milliseconds
 
-        // Fade in
+        // Calculate the delay for each line
+        var lineDelay = delay + (i * duration);
+
+        // Animate the line
         setTimeout(function(element) {
           element.style.opacity = "1";
           element.style.color = getRandomColor();
-        }, delay, line);
+        }, lineDelay, line);
 
-        // Fade out
+        // Fade out the line
         setTimeout(function(element) {
           element.style.opacity = "0";
-        }, delay + 7000, line);
+        }, lineDelay + duration, line);
       }
     }
 
-    // Call the fadeLines function
-    fadeLines();
+    // Call the fadeLines function after a delay
+    setTimeout(fadeLines, 3000);
   </script>
 </body>
 </html>
