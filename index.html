@@ -36,12 +36,13 @@
       text-align: center;
       position: absolute;
       opacity: 0;
+      transform: translate(-50%, -50%);
     }
   </style>
 </head>
 <body>
   <div id="video-container">
-    <iframe id="video" src="https://www.youtube.com/embed/cSgpAe9tl3Y?autoplay=1&start=0.25" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe id="video" src="https://www.youtube.com/embed/cSgpAe9tl3Y?autoplay=1&start=0.25" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen autoplay></iframe>
     <div id="overlay">
       <p class="line">We might be distant rivals or even good friends</p>
       <p class="line">I don't know how to describe this</p>
@@ -79,22 +80,23 @@
       var delay = 1000; // Delay before starting the animation
       var duration = 2000; // Duration of each animation
 
+      var currentDelay = delay;
       for (var i = 0; i < lines.length; i++) {
         var line = lines[i];
-
-        // Calculate the delay for each line
-        var lineDelay = delay + (i * duration);
 
         // Animate the line
         setTimeout(function(element) {
           element.style.opacity = "1";
           element.style.color = getRandomColor();
-        }, lineDelay, line);
+        }, currentDelay, line);
 
         // Fade out the line
         setTimeout(function(element) {
           element.style.opacity = "0";
-        }, lineDelay + duration, line);
+        }, currentDelay + duration, line);
+
+        // Update the current delay for the next line
+        currentDelay += duration;
       }
     }
 
