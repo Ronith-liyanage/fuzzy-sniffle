@@ -30,6 +30,21 @@
       text-align: center;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
+
+    /* Style for the highlighted message */
+    #cake-message {
+      font-size: 32px;
+      font-weight: bold;
+      color: #FFD700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Style for the happy face */
+    #happy-face {
+      font-size: 48px;
+      color: #FFD700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
   </style>
 </head>
 <body>
@@ -44,7 +59,11 @@
       <p class="line">You've lived until this moment</p>
       <p class="line">Why not keep living, my friend?</p>
       <p class="line">Achieve what you desire</p>
-      <p id="birthday">Happy Birthday!</p>
+      <p class="line" id="rk-wish">Happy Birthday, LegendKiller!</p>
+      <p class="line" id="recurring27-wish">Happy Birthday from recurring27!</p>
+      <p class="line" id="mck7002-wish">Happy Birthday from MCK7002!</p>
+      <p id="birthday">Hope we will get some cake on 26th <span id="happy-face">😊</span></p>
+      <p id="cake-message">Happy Birthday!</p>
     </div>
   </div>
 
@@ -62,30 +81,27 @@
       return color;
     }
 
-    // Function to show each line with fading effect and random color
-    function showLine(lineIndex, delay) {
-      setTimeout(function() {
-        var line = lines[lineIndex];
-        line.style.opacity = "1";
-        line.style.color = getRandomColor();
-        setTimeout(function() {
-          line.style.opacity = "0";
-        }, 10000); // Fade out after 10 seconds
-      }, delay);
+    // Function to fade in and fade out the lines of text
+    function fadeLines() {
+      for (var i = 0; i < lines.length; i++) {
+        var line = lines[i];
+        var delay = i * 10000; // Delay in milliseconds
+
+        // Fade in
+        setTimeout(function(element) {
+          element.style.opacity = "1";
+          element.style.color = getRandomColor();
+        }, delay, line);
+
+        // Fade out
+        setTimeout(function(element) {
+          element.style.opacity = "0";
+        }, delay + 7000, line);
+      }
     }
 
-    // Show each line with fading effect and random color
-    var delay = 2000; // Initial delay
-    for (var i = 0; i < lines.length; i++) {
-      showLine(i, delay);
-      delay += 10000; // Delay between lines (10 seconds)
-    }
-
-    // Show the "Happy Birthday!" line after all other lines
-    setTimeout(function() {
-      document.getElementById("birthday").style.opacity = "1";
-      document.getElementById("birthday").style.color = getRandomColor();
-    }, delay);
+    // Call the fadeLines function
+    fadeLines();
   </script>
 </body>
 </html>
